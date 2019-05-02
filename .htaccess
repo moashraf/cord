@@ -1,0 +1,22 @@
+RewriteEngine On
+#RewriteCond %{HTTP_HOST} ^www.mar-decor.com$ [NC]
+#RewriteCond %{HTTP_HOST} ^mar-decor.com$ [NC]
+#RewriteRule ^(.*)$ https://mar-decor.com/$1 [R=301,L]
+
+RewriteCond %{HTTPS} off
+RewriteCond %{REQUEST_URI} !^/\.well-known/cpanel-dcv/[0-9a-zA-Z_-]+$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/(?:\ Ballot169)?
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule (.*) https://%{HTTP_HOST}/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^www.mar-decor.com$
+RewriteCond %{REQUEST_URI} !^/\.well-known/cpanel-dcv/[0-9a-zA-Z_-]+$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/(?:\ Ballot169)?
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^(.*) https://mar-decor.com/$1  [QSA,L,R=301]
+
+RewriteCond %{REQUEST_URI} !^/\.well-known/cpanel-dcv/[0-9a-zA-Z_-]+$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/(?:\ Ballot169)?
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^(.*)$ public/$1 [L]
+
+<IfModule mod_rewrite.c>
